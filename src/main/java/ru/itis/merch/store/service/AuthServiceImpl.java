@@ -3,7 +3,6 @@ package ru.itis.merch.store.service;
 import lombok.RequiredArgsConstructor;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.DefaultTransactionAttribute;
 import ru.itis.merch.store.dao.RoleDAO;
 import ru.itis.merch.store.dao.UserDAO;

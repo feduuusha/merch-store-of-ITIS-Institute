@@ -44,18 +44,14 @@ public class AuthFilter extends HttpFilter {
             if (cookieSessionId != null) {
                 String sessionId = cookieSessionId.getValue();
                 userDAO.findBySessionId(sessionId).ifPresent((user) -> {
-                    roleDAO.findById(user.getRoleId()).ifPresent((role) -> {
-                        req.getSession().setAttribute("role", role.getName());
-                    });
+                    roleDAO.findById(user.getRoleId()).ifPresent((role) -> req.getSession().setAttribute("role", role.getName()));
                     req.getSession().setAttribute("user", user);
                 });
             }
         }
         if (req.getSession().getAttribute("user") != null && req.getSession().getAttribute("role") == null) {
             User user = (User) req.getSession().getAttribute("user");
-            roleDAO.findById(user.getRoleId()).ifPresent((role) -> {
-                req.getSession().setAttribute("role", role.getName());
-            });
+            roleDAO.findById(user.getRoleId()).ifPresent((role) -> req.getSession().setAttribute("role", role.getName()));
         }
         if (req.getSession().getAttribute("role") == null) {
             boolean isAuthorized = isAuthorized(NOT_AUTHENTICATED_ROLE_NAME, req.getRequestURI());
